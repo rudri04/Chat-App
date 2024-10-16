@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chat_app/Widgets/googleSignup.dart';
 import 'package:chat_app/Widgets/user_image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -8,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 final firebase = FirebaseAuth.instance;
+final auth = Get.put(GoogleService());
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -184,7 +186,14 @@ class _SignupState extends State<Signup> {
                                   backgroundColor: Theme.of(context).colorScheme.primaryContainer
                                 ),
                               child: Text( _isLogin ? 'Log In' : 'Sign Up')),
+                          const SizedBox(height: 10,),
+                          if(!_isLogin)
+                          ElevatedButton(onPressed: ()async{
+                           await auth.signInWithGoogle();
+                          },
+                              child: const Text('SignUp with Google')),
 
+                          const SizedBox(height: 10,),
                           if(!isAuthenticating)
                             TextButton(onPressed: (){
                                setState(() {
