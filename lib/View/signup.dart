@@ -9,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 final firebase = FirebaseAuth.instance;
-final auth = Get.put(GoogleService());
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -19,6 +18,7 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  final auth = GoogleService();
   final formKey =GlobalKey<FormState>();
     var _isLogin =true;
     var _enteredEmail = '';
